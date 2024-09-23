@@ -1,12 +1,12 @@
 # 2D Diffusion
 
-A hobby project of mine implementing the process of particles ![diffusing](https://en.wikipedia.org/wiki/Diffusion) in 2-dimensional space using the Gauss-Seidel iteration with successive over-relaxation.
+A hobby project of mine implementing the process of particles [diffusing](https://en.wikipedia.org/wiki/Diffusion) in 2-dimensional space using the Gauss-Seidel iteration with successive over-relaxation.
 
 ## How to run
 
-To run the project you will need a valid ![CMake](https://cmake.org/) installation (version at least 3.16).
+To run the project you will need a valid [CMake](https://cmake.org/) installation (version at least 3.16).
 
-I utilize the ![SFML framework](https://github.com/SFML/SFML) for visualization (no installation needed).
+I utilize the [SFML framework](https://github.com/SFML/SFML) for visualization (no installation needed).
 
 ### Automatic build (using IDE, recommended)
 
