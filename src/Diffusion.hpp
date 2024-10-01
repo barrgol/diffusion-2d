@@ -8,7 +8,7 @@
 class Diffusion
 {
 public:
-    const int SIZE = 100;
+    const int SIZE = 200;
     const float OMEGA = 1.91f;
     const float EPSILON = 1.0e-5;
 
