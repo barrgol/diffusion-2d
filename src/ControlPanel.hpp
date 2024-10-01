@@ -24,7 +24,7 @@ public:
     bool SIMULATION_ON = false;
 
     // Diffusion logic
-    Diffusion* diff;
+    Diffusion* diffPtr;
 
     // Constructor & Destructor
     ControlPanel(sf::Font& font, Diffusion* diff);

@@ -1,32 +1,38 @@
 #include "SimulationPanel.hpp"
 
 
-SimulationPanel::SimulationPanel() {
+SimulationPanel::SimulationPanel(Diffusion* diffPtr) {
+    for (size_t i = 0; i < (*diffPtr).SIZE; i++) {
+        this->gridCells.push_back({});
+        this->diffPtr = diffPtr;
 
+        for (size_t j = 0; j < (*diffPtr).SIZE; j++) {
+            sf::RectangleShape rectangle;
+            rectangle.setSize(sf::Vector2f(this->WIDTH / (*diffPtr).SIZE, this->HEIGHT / (*diffPtr).SIZE));
+            rectangle.setPosition(this->LEFT_OFFSET + j * (float)this->WIDTH / (*diffPtr).SIZE, i * (float)this->HEIGHT / (*diffPtr).SIZE);
+            rectangle.setFillColor(sf::Color(SimulationPanel::BASE_COLOR.r, BASE_COLOR.g, BASE_COLOR.b, (*diffPtr).grid[i][j] * 255));
+
+            this->gridCells[i].push_back(rectangle);
+        }
+    }
 }
 
 SimulationPanel::~SimulationPanel() {
 
 }
 
-void SimulationPanel::render(sf::RenderWindow& window, Diffusion& diff) {
-    // TODO: This should not be reinitialized
-    std::vector<sf::RectangleShape> shapes{};
-
-    for (size_t i = 0; i < diff.SIZE; i++) {
-        for (size_t j = 0; j < diff.SIZE; j++) {
-            sf::RectangleShape rectangle;
-            rectangle.setSize(sf::Vector2f(this->WIDTH / diff.SIZE, this->HEIGHT / diff.SIZE));
-            rectangle.setPosition(this->LEFT_OFFSET + j * (float)this->WIDTH / diff.SIZE, i * (float)this->HEIGHT / diff.SIZE);
-            rectangle.setFillColor(sf::Color(SimulationPanel::BASE_COLOR.r, BASE_COLOR.g, BASE_COLOR.b, diff.grid[i][j] * 255));
-
-            shapes.push_back(rectangle);
+void SimulationPanel::update() {
+    for (size_t i = 0; i < (*diffPtr).SIZE; i++) {
+        for (size_t j = 0; j < (*diffPtr).SIZE; j++) {
+            this->gridCells[i][j].setFillColor(sf::Color(SimulationPanel::BASE_COLOR.r, BASE_COLOR.g, BASE_COLOR.b, (*diffPtr).grid[i][j] * 255));
         }
     }
+}
 
-    for (sf::RectangleShape rectangle : shapes) {
-        window.draw(rectangle);
+void SimulationPanel::render(sf::RenderWindow& window) {
+    for (size_t i = 0; i < (*diffPtr).SIZE; i++) {
+        for (size_t j = 0; j < (*diffPtr).SIZE; j++) {
+            window.draw(this->gridCells[i][j]);
+        }
     }
-
-    return;
 }

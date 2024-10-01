@@ -3,7 +3,7 @@
 
 ControlPanel::ControlPanel(sf::Font& font, Diffusion* diff) {
     this->font = font;
-    this->diff = diff;
+    this->diffPtr = diff;
 }
 
 ControlPanel::~ControlPanel() {
@@ -75,7 +75,7 @@ void ControlPanel::renderSimulationToggle(sf::RenderWindow& window) {
 void ControlPanel::renderSimulationSteps(sf::RenderWindow& window) {
     // Simulation steps text
     // Text on the toggle button
-    sf::Text text{ "Simulation steps: " + std::to_string(this->diff->nsteps) + (diff->converged ? " (conv.)" : ""), this->font };
+    sf::Text text{ "Simulation steps: " + std::to_string(this->diffPtr->nsteps) + (this->diffPtr->converged ? " (conv.)" : ""), this->font };
     text.setCharacterSize(20);
     text.setFillColor(sf::Color::Black);
     text.setOrigin(-(this->BACKGROUND_POSITION + sf::Vector2f{ 0, this->BACKGROUND_SIZE.y }));

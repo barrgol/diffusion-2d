@@ -16,12 +16,12 @@ int main()
     }
 
     // Declare diffusion logic
-    Diffusion diff{};
+    Diffusion* diffPtr = new Diffusion();
 
     // Declare window and visual panels
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Application");
-    SimulationPanel simulationPanel{};
-    ControlPanel controlPanel{ font, &diff };
+    SimulationPanel simulationPanel(diffPtr);
+    ControlPanel controlPanel(font, diffPtr);
 
     // Mainloop
     window.clear();
@@ -43,10 +43,12 @@ int main()
 
         window.clear();
 
-        if (controlPanel.SIMULATION_ON && !diff.converged) {
-            diff.step();
+        if (controlPanel.SIMULATION_ON && !(*diffPtr).converged) {
+            (*diffPtr).step();
         }
-        simulationPanel.render(window, diff);
+
+        simulationPanel.update();
+        simulationPanel.render(window);
         controlPanel.render(window);
 
         window.display();

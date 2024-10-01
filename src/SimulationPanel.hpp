@@ -11,10 +11,14 @@ public:
     const int LEFT_OFFSET = 500;
     const sf::Color BASE_COLOR{ 200, 200, 30 };
 
-    SimulationPanel();
+    Diffusion* diffPtr;
+    std::vector<std::vector<sf::RectangleShape>> gridCells;
+
+    SimulationPanel(Diffusion* diffPtr);
     ~SimulationPanel();
 
-    void render(sf::RenderWindow& window, Diffusion& diff);
+    void update();
+    void render(sf::RenderWindow& window);
 
 private:
     /* data */
